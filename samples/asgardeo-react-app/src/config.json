@@ -1,7 +1,23 @@
 {
-    "clientID": "",
-    "baseUrl": "",
-    "signInRedirectURL": "https://localhost:3000",
-    "signOutRedirectURL": "https://localhost:3000",
-    "scope": ["profile"]
+    "endpoints": {
+        "authorizationEndpoint": "https://dev.api.asgardeo.io/t/a/oauth2/authorize",
+        "tokenEndpoint": "https://dev.api.asgardeo.io/t/a/oauth2/token",
+        "endSessionEndpoint": "https://dev.api.asgardeo.io/t/a/oidc/logout"
+    },
+    "overrideWellEndpointConfig": true,
+    "signInRedirectURL": "https://localhost:3000/signin",
+    "signOutRedirectURL": "https://localhost:3000/login",
+    "clientID": "_eEveWFdTSJPaui7DmCuU5DUrUEa",
+    "baseUrl": "https://dev.api.asgardeo.io",
+    "clientHost": "https://localhost:3000",
+    "enablePKCE": true,
+    "storage": "webWorker",
+    "checkSessionInterval": -1,
+    "disableTrySignInSilently": true,
+    "scope": [
+        "profile",
+        "email"
+    ],
+    "resourceServerURLs": "https://sts.preview-dv.choreo.dev|https://km.preview-dv.choreo.dev|https://apim.preview-dv.choreo.dev|https://choreocontrolplane.preview-dv.choreo.dev|https://localhost:3000|subscriptions.dv.wso2.com|https://apis.preview-dv.choreo.dev/projects/1.0.0/graphql|https://apis.preview-dv.choreo.dev/org-mgt/1.0.0/orgs",
+    "fidp": "google"
 }

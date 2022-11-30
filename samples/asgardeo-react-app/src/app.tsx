@@ -33,6 +33,8 @@ const AppContent: FunctionComponent = (): ReactElement => {
             <Router>
             <Switch>
                 <Route exact path="/" component={HomePage} />
+                <Route exact path="/signin" component={HomePage} />
+                <Route exact path="/login" component={HomePage} />
                 <Route component={NotFoundPage} />
             </Switch>
         </Router>

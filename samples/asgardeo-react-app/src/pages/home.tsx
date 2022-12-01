@@ -25,6 +25,7 @@ import { AuthenticationResponse } from "../components";
 import { useLocation } from "react-router-dom";
 import { LogoutRequestDenied } from "../components/LogoutRequestDenied";
 import { USER_DENIED_LOGOUT } from "../constants/errors";
+import AnalyticsPortal from "@wso2-enterprise/choreo-apim-analytics-portal";
 
 /**
  * Decoded ID Token Response component Prop types interface.
@@ -150,7 +151,8 @@ export const HomePage: FunctionComponent<HomePagePropsInterface> = (): ReactElem
                         <div className="content">
                             <AuthenticationResponse
                                 derivedResponse={ derivedAuthenticationState }
-                            />
+                />
+                <AnalyticsPortal/>
                             <button
                                 className="btn primary mt-4"
                                 onClick={ () => {

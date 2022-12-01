@@ -33,69 +33,101 @@ const PORT_IN_USE_PROMPT = `${ chalk.blue("Be sure to update the following confi
         - Update the Authorized Redirect URL.
         - Update the Allowed Origins.
 `;
+const ANALYTICS_PORTAL_DIR = path.resolve(
+  __dirname,
+  "./node_modules/@wso2-enterprise/choreo-apim-analytics-portal"
+);
 
 module.exports = {
-    devServer: {
-        contentBase: path.resolve(__dirname, "dist"),
-        historyApiFallback: true,
-        https: true,
-        host: HOST,
-        inline: true,
-        port: findPort(PORT, HOST, false, {
-            extensions: {
-                BEFORE_getProcessTerminationMessage: () => {
-                  return PORT_IN_USE_PROMPT;
-                }
-            }
-        })
-    },
-    devtool: "source-map",
-    entry: ["./src/app.tsx"],
-    module: {
-        rules: [
-            {
-                test: /\.(tsx|ts|js|jsx)$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: "babel-loader"
-                }
-            },
-            {
-                test: /\.css$/,
-                use: ["style-loader", "css-loader"]
-            },
-            {
-                test: /\.(png|jpg|cur|gif|eot|ttf|woff|woff2)$/,
-                use: ["url-loader"]
-            },
-            {
-                test: /\.html$/,
-                use: [
-                    {
-                        loader: "html-loader"
-                    }
-                ]
-            },
-            {
-                test: /\.js$/,
-                enforce: "pre",
-                use: ["source-map-loader"],
-            }
-        ]
-    },
-    node: {
-        fs: "empty"
-    },
-    output: {
-        path: path.resolve(__dirname, "dist"),
-        filename: "[name].js"
-    },
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: "./src/index.html"
-        })
+  devServer: {
+    contentBase: path.resolve(__dirname, "dist"),
+    historyApiFallback: true,
+    https: true,
+    host: HOST,
+    inline: true,
+    port: findPort(PORT, HOST, false, {
+      extensions: {
+        BEFORE_getProcessTerminationMessage: () => {
+          return PORT_IN_USE_PROMPT;
+        },
+      },
+    }),
+  },
+  devtool: "source-map",
+  entry: ["./src/app.tsx"],
+  module: {
+    rules: [
+      {
+        test: /\.(tsx|ts|js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+        },
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.(png|jpg|cur|gif|eot|ttf|woff|woff2)$/,
+        use: ["url-loader"],
+      },
+      {
+        test: /\.html$/,
+        use: [
+          {
+            loader: "html-loader",
+          },
+        ],
+      },
+      {
+        test: /\.js$/,
+        enforce: "pre",
+        use: ["source-map-loader"],
+      },
+      {
+        test: /\.css$/,
+        include: ANALYTICS_PORTAL_DIR,
+        use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        include: ANALYTICS_PORTAL_DIR,
+        use: [
+          // Creates `style` nodes from JS strings
+          "style-loader",
+          // Translates CSS into CommonJS
+          "css-loader",
+          // Compiles Sass to CSS
+          "sass-loader",
+        ],
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot|otf|svg|png)(\?v=\d+\.\d+\.\d+)?$/,
+        include: ANALYTICS_PORTAL_DIR,
+        use: ["file-loader"],
+      },
+      // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
+      {
+        test: /\.js$/,
+        use: ["source-map-loader"],
+        enforce: "pre",
+      },
     ],
-    resolve: {
-        extensions: [".tsx", ".ts", ".js", ".json"]
-    }
+  },
+  node: {
+    fs: "empty",
+  },
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: "[name].js",
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "./src/index.html",
+    }),
+  ],
+  resolve: {
+    extensions: [".tsx", ".ts", ".js", ".json"],
+  },
 };

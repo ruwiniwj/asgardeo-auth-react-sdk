@@ -39,7 +39,12 @@
         "react": "^16.14.0",
         "react-dom": "16.14.0",
         "react-json-view": "^1.21.1",
-        "react-router-dom": "5.2.0"
+        "react-router-dom": "5.2.0",
+        "@wso2-enterprise/choreo-apim-analytics-portal": "v0.6.15-6951000aeccdc8e2420a4f366eb1fc79aee745d0",
+        "sass": "^1.32.12",
+        "sass-loader": "^8.0.2",
+        "source-map-loader": "^0.2.4",
+        "file-loader": "^5.0.2"
     },
     "devDependencies": {
         "@babel/cli": "^7.12.1",
